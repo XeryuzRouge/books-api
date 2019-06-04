@@ -7,7 +7,7 @@ class BooksAPI
     searching_word
   end
 
-  def lookFor(keyword)
+  def look_for(keyword)
     @searching_word = keyword
     return keyword
   end
