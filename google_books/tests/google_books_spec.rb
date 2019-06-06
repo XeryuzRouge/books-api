@@ -7,6 +7,7 @@ RSpec.describe Search do
 
   it "should send request and receive response from Google Books API" do
     response = google_books.look_for("anything")
+    parsed = JSON.parse response.body
 
     expect(response.code).to eq 200
     expect(valid_json?(response.body)).to eq true

@@ -10,7 +10,7 @@ class GoogleBooks
   end
 
   def look_for(keyword)
-    HTTParty.get(base_url + keyword)
+    HTTParty.get(base_url + keyword + "&maxResults=2")
   end
 
 end
