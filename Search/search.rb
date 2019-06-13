@@ -1,17 +1,18 @@
 
+require_relative '../google_books/google_books'
+
 class Search
 
   attr_reader :books_api
-  attr_reader :response_handler
 
-  def initialize(books_api, response_handler)
+  def initialize(books_api = GoogleBooks.new)
     @books_api = books_api
-    @response_handler = response_handler
   end
 
   def for(keyword)
-    response = books_api.lookFor(keyword)
-    response_handler.handle(response)
+    keyword = "nothing" if(keyword.empty?)
+    
+    books_api.search(keyword)
   end
 
 end
