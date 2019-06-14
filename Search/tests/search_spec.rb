@@ -4,7 +4,8 @@ require_relative '../search'
 RSpec.describe Search do
 
   let(:books_api) { FakeBooksAPI.new }
-  let(:search) { Search.new(books_api) }
+  let(:response_filter) { FakeResponseFilter.new }
+  let(:search) { Search.new(books_api, response_filter) }
 
   it "should receive and send a search request" do
     search.for("common search request")
@@ -18,10 +19,10 @@ RSpec.describe Search do
     expect(books_api.request_received).to eq "nothing"
   end
 
-  it "should return search results" do
+  it "should return filtered search results" do
     results = search.for("answers")
 
-    expect(results).to eq "answers results"
+    expect(results).to eq "answers results filtered"
   end
 
 end
@@ -38,6 +39,14 @@ class FakeBooksAPI
 
   def request_received
     last_request
+  end
+
+end
+
+class FakeResponseFilter
+
+  def for(results)
+    results + " filtered"
   end
 
 end
